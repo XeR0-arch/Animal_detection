@@ -1,0 +1,111 @@
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.10 (NOT 3.12/3.13)
+- ~2GB disk space for dataset
+
+### One-Command Setup
+```bash
+py -3.10 -m pip install -r requirements.txt
+py -3.10 run_all.py
+
+# 1. Install dependencies
+py -3.10 -m pip install -r requirements.txt
+
+# 2. Download fresh dataset (1000 imgs × 8 animals)
+py -3.10 download_fresh.py
+
+# 3. Remove any duplicates
+py -3.10 fix_duplicates.py
+
+# 4. Train teacher + distill student
+py -3.10 distill.py
+
+# 5. Convert for ESP32-CAM
+py -3.10 convert.py
+
+# 6. Generate proof-of-work PDF
+py -3.10 generate_report.py
+
+WildEdge-AI/
+├── config.py                 ← All settings (change animals, sizes here)
+├── requirements.txt          ← Python dependencies
+├── run_all.py                ← One-click full pipeline
+│
+├── download_fresh.py         ← Downloads 1000 imgs/animal from Bing
+├── organize_data.py          ← Organizes existing Kaggle dataset
+├── expand_dataset.py         ← Augments images to reach target count
+├── fix_duplicates.py         ← Finds & removes duplicate images
+│
+├── train.py                  ← Basic training (transfer learning)
+├── distill.py                ← Full distillation pipeline ⭐
+├── convert.py                ← Keras → TFLite → C header for ESP32
+│
+├── demo.py                   ← Live demo script
+├── generate_report.py        ← Generates proof-of-work PDF
+│
+├── student_model.keras       ← Trained student model (274 KB) ⭐
+├── class_names.txt           ← Animal class list
+├── animal_model.tflite       ← Quantized model for ESP32 (after convert.py)
+├── animal_model.h            ← C header for Arduino (after convert.py)
+│
+├── esp32_sketch/             ← Arduino code for ESP32-CAM (TODO)
+│   └── esp32_sketch.ino
+│
+├── training_results.png      ← Accuracy/loss graphs
+├── distillation_results.png  ← Teacher vs student comparison
+├── test_predictions.png      ← Sample prediction results
+└── WildEdge_AI_Proof_of_Work.pdf  ← Full proof report
+
+
+### Create `TEAM_GUIDE.md` (the doc your team needs)
+
+```markdown
+# 📋 WildEdge AI — Team Handoff Guide
+
+## 📌 What's Done
+- ✅ Knowledge Distillation pipeline (distill.py)
+- ✅ Teacher model: 95.0% accuracy (23MB, NOT deployed)
+- ✅ Student model: 79.8% accuracy (274KB, THIS gets deployed)
+- ✅ 8 animals: bear, deer, elephant, gorilla, leopard, lion, tiger, zebra
+- ✅ Proof-of-work PDF generated
+- ✅ GitHub repo set up
+
+## 📌 What's LEFT To Do
+- ❌ Download fresh 1000-image dataset (old one had duplicates)
+- ❌ Retrain with clean data (run distill.py again)
+- ❌ Convert model to TFLite (run convert.py)
+- ❌ Flash model to ESP32-CAM (Arduino IDE)
+- ❌ Build physical demo unit
+- ❌ Record final demo video
+
+---
+
+## 🔧 Setup (New Team Member)
+
+### Step 1: Clone the repo
+
+git clone https://github.com/XeR0-arch/Animal_detection.git
+cd Animal_detection
+py -3.10 --version
+# Must say Python 3.10.x
+# If not installed: https://www.python.org/downloads/release/python-31011/
+py -3.10 -m pip install -r requirements.txt
+py -3.10 download_fresh.py
+py -3.10 distill.py
+py -3.10 convert.py
+py -3.10 run_all.py
+
+
+File	                        What It Does	                        When to Run
+download_fresh.py	            Downloads 1000 images per animal	    Once (or when you want fresh data)
+fix_duplicates.py	            Removes duplicate images	            After downloading
+distill.py	                    Trains teacher + distills student	    After dataset is ready
+convert.py	                    Makes TFLite + C header for ESP32	    After training
+generate_report.py	            Creates proof PDF	                    Before submission
+demo.py	                        Live terminal demo	                    For demo/video
+run_all.py	                    Runs everything in order	            Lazy mode 😄
+config.py	                    All settings in one place	            Edit when changing config

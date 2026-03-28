@@ -1,21 +1,31 @@
-# 🌿 WildEdge AI — Zero-Cloud Wildlife Monitoring
+# Datasets (too large for GitHub)
+dataset/
+dataset_raw/
+raw_downloads/
+archive/
 
-> Edge AI animal classifier running on a $6 ESP32-CAM microcontroller.
-> Built for the **UNPLUGGED Hardware Hackathon**.
+# Large teacher model (not needed, student is what we deploy)
+teacher_model.keras
 
----
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
 
-## 🎯 What This Does
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
 
-A hidden jungle camera that identifies **8 wild animals** completely 
-**offline** — no internet, no cloud, no server. Just a $6 chip and AI.
+# Virtual environments
+animal_env/
+venv/
+.venv/
+env/
 
-**Animals:** Bear, Deer, Elephant, Gorilla, Leopard, Lion, Tiger, Zebra
+# IDE
+.vscode/
+.idea/
 
----
-
-## 🧠 The Secret: Knowledge Distillation
-
-We don't just train a small model. We train a **HUGE model first** 
-(the Teacher), then force a **tiny model** (the Student) to learn 
-from it — like a professor teaching a student.
+# Temp files
+_temp_download/
